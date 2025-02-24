@@ -1,0 +1,43 @@
+<div class="random-enemy-preview">
+  <h2>{{name}} ({{clan}})</h2>
+  <div class="token-preview">
+    <img src="{{token}}" alt="Token" style="max-width: 100px; max-height: 100px;">
+  </div>
+  <label for="difficulty">{{localize 'VTMRE.Difficulty'}}:</label>
+  <select class="difficulty-select">
+    <option value="easy" {{#if (eq difficulty 'easy')}}selected{{/if}}>{{localize 'VTMRE.Easy'}}</option>
+    <option value="medium" {{#if (eq difficulty 'medium')}}selected{{/if}}>{{localize 'VTMRE.Medium'}}</option>
+    <option value="hard" {{#if (eq difficulty 'hard')}}selected{{/if}}>{{localize 'VTMRE.Hard'}}</option>
+  </select>
+  <p><strong>{{localize 'VTMRE.Generation'}}:</strong> {{generation}}</p>
+  <p><strong>{{localize 'VTMRE.BloodPotency'}}:</strong> {{bloodPotency}}</p>
+  <p><strong>{{localize 'VTMRE.Hunger'}}:</strong> {{hunger}}</p>
+  <p><strong>{{localize 'VTMRE.PredatorType'}}:</strong> {{predatorType}}</p>
+  <p><strong>{{localize 'VTMRE.Convictions'}}:</strong> {{convictions}}</p>
+  <p><strong>{{localize 'VTMRE.Humanity'}}:</strong> {{humanity}}</p>
+  <p><strong>{{localize 'VTMRE.Health'}}:</strong> {{healthMax}}</p>
+  <p><strong>{{localize 'VTMRE.Willpower'}}:</strong> {{willpowerMax}}</p>
+  <h3>{{localize 'VTMRE.Disciplines'}}:</h3>
+  <ul>
+    {{#each disciplines}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+  <h3>{{localize 'VTMRE.Attributes'}}:</h3>
+  <p>{{localize 'VTMRE.Strength'}}: {{attributes.strength.value}}</p>
+  <p>{{localize 'VTMRE.Dexterity'}}: {{attributes.dexterity.value}}</p>
+  <p>{{localize 'VTMRE.Stamina'}}: {{attributes.stamina.value}}</p>
+  <p>{{localize 'VTMRE.Charisma'}}: {{attributes.charisma.value}}</p>
+  <p>{{localize 'VTMRE.Manipulation'}}: {{attributes.manipulation.value}}</p>
+  <p>{{localize 'VTMRE.Composure'}}: {{attributes.composure.value}}</p>
+  <p>{{localize 'VTMRE.Intelligence'}}: {{attributes.intelligence.value}}</p>
+  <p>{{localize 'VTMRE.Wits'}}: {{attributes.wits.value}}</p>
+  <p>{{localize 'VTMRE.Resolve'}}: {{attributes.resolve.value}}</p>
+  <h3>{{localize 'VTMRE.Skills'}}:</h3>
+  {{#each skills}}
+    {{#if this.value}}
+      <p>{{localize (concat 'VTMRE.' (capitalize @key))}}: {{this.value}}</p>
+    {{/if}}
+  {{/each}}
+  <button class="create-enemy">{{localize 'VTMRE.CreateButton'}}</button>
+</div>

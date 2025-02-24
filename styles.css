@@ -1,0 +1,48 @@
+.random-enemy-preview {
+  padding: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.random-enemy-preview h2 {
+  color: #b22222;
+  text-align: center;
+}
+
+.random-enemy-preview h3 {
+  margin-top: 15px;
+  color: #444;
+}
+
+.random-enemy-preview ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.random-enemy-preview p {
+  margin: 5px 0;
+}
+
+.token-preview {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.difficulty-select {
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
+}
+
+.random-enemy-preview button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #b22222;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.random-enemy-preview button:hover {
+  background-color: #8b1a1a;
+}
