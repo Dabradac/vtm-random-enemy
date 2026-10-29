@@ -7,24 +7,23 @@ Hooks.once('init', () => {
 });
 
 Hooks.on('getSceneControlButtons', (controls) => {
-  const group = controls.find(c => c.name === 'token');
-  if (group) {
-    group.tools.push({
-      name: 'generate-vtm-enemy',
-      title: game.i18n.localize('VTMRE.ButtonTitle'),
-      icon: 'fas fa-skull',
-      visible: true,
-      button: true,
-      onClick: () => {
-        new RandomEnemyPreview().render(true);
-      }
-    });
-  }
+  const tool = {
+    name: 'generate-vtm-enemy',
+    title: game.i18n.localize('VTMRE.ButtonTitle'),
+    icon: 'fas fa-skull',
+    visible: true,
+    button: true,
+    onChange: () => new RandomEnemyPreview().render(true)
+  };
+
+  // v13+: controls и tools — объекты, а не массивы
+  const group = controls.tokens;
+  if (group) group.tools[tool.name] = { ...tool, order: Object.keys(group.tools).length };
 });
 
 class RandomEnemyPreview extends Application {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: 'random-enemy-preview',
       title: game.i18n.localize('VTMRE.PreviewTitle'),
       template: 'modules/vtm-random-enemy/templates/preview.html',
@@ -43,7 +42,7 @@ class RandomEnemyPreview extends Application {
     const clans = ['Brujah', 'Gangrel', 'Malkavian', 'Nosferatu', 'Toreador', 'Tremere', 'Ventrue'];
     const disciplinesList = [
       'Animalism', 'Auspex', 'Celerity', 'Dominate', 'Fortitude', 'Obfuscate', 
-      'Potence', 'Presence', 'Protean', 'Thaumaturgy', 'Dementation'
+      'Potence', 'Presence', 'Protean', 'Sorcery', 'Oblivion'
     ];
     const predatorTypes = {
       'Alleycat': { skills: { brawl: 2, intimidation: 1 }, disciplines: ['Potence'] },
@@ -51,7 +50,7 @@ class RandomEnemyPreview extends Application {
       'Blood Leech': { skills: { brawl: 2, stealth: 1 }, disciplines: ['Protean'], humanity: -1 },
       'Cleaver': { skills: { persuasion: 2, subterfuge: 1 }, disciplines: ['Dominate'] },
       'Consensualist': { skills: { persuasion: 2, insight: 1 }, disciplines: ['Presence'], humanity: 1 },
-      'Farmer': { skills: { animalKen: 2, survival: 1 }, disciplines: ['Animalism'], humanity: 1 },
+      'Farmer': { skills: { animalken: 2, survival: 1 }, disciplines: ['Animalism'], humanity: 1 },
       'Sandman': { skills: { stealth: 2, medicine: 1 }, disciplines: ['Obfuscate'] },
       'Siren': { skills: { persuasion: 2, performance: 1 }, disciplines: ['Presence'] }
     };
@@ -105,7 +104,7 @@ class RandomEnemyPreview extends Application {
       melee: { value: Math.floor(Math.random() * mod.skillMax) },
       stealth: { value: Math.floor(Math.random() * mod.skillMax) },
       survival: { value: Math.floor(Math.random() * mod.skillMax) },
-      animalKen: { value: Math.floor(Math.random() * mod.skillMax) },
+      animalken: { value: Math.floor(Math.random() * mod.skillMax) },
       etiquette: { value: Math.floor(Math.random() * mod.skillMax) },
       insight: { value: Math.floor(Math.random() * mod.skillMax) },
       intimidation: { value: Math.floor(Math.random() * mod.skillMax) },
